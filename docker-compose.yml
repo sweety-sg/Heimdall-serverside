@@ -1,0 +1,34 @@
+version: "3.2"
+
+services:
+    web:
+        restart: always
+        build: ./code
+        container_name: heimdall_serverside_web
+        command: /usr/bin/supervisord -c /etc/supervisord.conf
+        env_file:
+            - code/configuration/flask.env
+        expose:
+            - 5000
+        volumes:
+            - ./code/:/code/
+            - ${AUTH}:/mounts/auth.log
+            - ${AUTHORIZED_KEYS}:/mounts/authorized_keys
+        networks:
+            - heimdall_serverside
+    
+    nginx:
+        build: ./nginx
+        container_name: heimdall_serverside_nginx
+        ports:
+            - "4322:80"
+        depends_on: 
+            - web
+        networks: 
+            - heimdall_serverside
+
+volumes:
+    database:
+
+networks:
+    heimdall_serverside:

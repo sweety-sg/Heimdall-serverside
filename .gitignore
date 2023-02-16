@@ -1,0 +1,4 @@
+.env
+*.pyc
+code/configuration/config.yml
+.venv

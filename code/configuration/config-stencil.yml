@@ -1,0 +1,7 @@
+DESTINATION_FILE: /mounts/authorized_keys # Do not change
+AUTH_LOG: /mounts/auth.log # Do not change
+
+MASTER:
+    URL: <url of master>
+	ENDPOINT_LOG: /bipolar/log # Do not change
+    SECRET: <secret of the master>
